@@ -85,7 +85,9 @@ final class Locale extends \Locale
 
             array_pop($localeSubTags);
 
-            return locale_compose($localeSubTags);
+            $fallback = locale_compose($localeSubTags);
+
+            return false !== $fallback ? $fallback : null;
         }
 
         if (false !== $pos = strrpos($locale, '_')) {
@@ -105,6 +107,8 @@ final class Locale extends \Locale
         if (\strlen($locale) < 4) {
             return self::$defaultFallback;
         }
+
+        return null;
     }
 
     /**
