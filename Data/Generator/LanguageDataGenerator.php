@@ -39,7 +39,7 @@ class LanguageDataGenerator extends AbstractDataGenerator
         'cs' => 'ces',
         'cy' => 'cym',
         'de' => 'deu',
-        'dz' => 'dzo',
+        'dz' => 'dza',
         'el' => 'ell',
         'et' => 'est',
         'eu' => 'eus',
