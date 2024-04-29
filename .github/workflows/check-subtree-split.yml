@@ -12,7 +12,7 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          if (context.repo.owner === "symfony") {
+          if (context.repo.owner !== "symfony") {
             github.rest.issues.createComment({
               owner: "symfony",
               repo: context.repo.repo,
