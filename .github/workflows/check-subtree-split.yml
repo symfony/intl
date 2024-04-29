@@ -29,7 +29,7 @@ jobs:
             });
 
             github.rest.pulls.update({
-              owner: "symfony",
+              owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
               state: "closed"
