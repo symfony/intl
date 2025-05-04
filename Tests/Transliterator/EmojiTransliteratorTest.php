@@ -189,6 +189,6 @@ class EmojiTransliteratorTest extends TestCase
     {
         $transliterator = EmojiTransliterator::create('emoji-en');
 
-        $this->assertFalse($transliterator->getErrorMessage());
+        $this->assertSame('', $transliterator->getErrorMessage());
     }
 }
