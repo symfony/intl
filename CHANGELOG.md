@@ -6,6 +6,11 @@ CHANGELOG
 
  * Remove `Symfony\Component\Intl\Transliterator\EmojiTransliterator`, use `Symfony\Component\Emoji\EmojiTransliterator` instead
 
+7.4
+---
+
+ * Allow Kosovo as a component region, controlled by the `SYMFONY_INTL_WITH_USER_ASSIGNED` env var
+
 7.1
 ---
 

@@ -1,22 +1,30 @@
 <?php
 
-return [
-    'UserAssignedRegions' => [
-        'XK',
-    ],
-    'UserAssignedAlpha2ToAlpha3' => [
-        'XK' => 'XKK',
-    ],
-    'UserAssignedAlpha3ToAlpha2' => [
-        'XKK' => 'XK',
-    ],
-    'UserAssignedAlpha2ToNumeric' => [
-        'XK' => '983',
-    ],
-    'UserAssignedNumericToAlpha2' => [
-        '_983' => 'XK',
-    ],
-    'Regions' => [
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Symfony\Component\Intl\Tests;
+
+use Symfony\Component\Intl\Countries;
+use Symfony\Component\Intl\Exception\MissingResourceException;
+use Symfony\Component\Intl\Util\IntlTestHelper;
+
+/**
+ * @group intl-data
+ */
+class CountriesWithUserAssignedTest extends ResourceBundleTestCase
+{
+    /*
+     * The below arrays document the state of ICU data bundled with this package
+     * when SYMFONY_ALLOW_OPTIONAL_USER_ASSIGNED is set to `true`.
+     */
+    private const COUNTRIES_WITH_USER_ASSIGNED = [
         'AD',
         'AE',
         'AF',
@@ -266,8 +274,10 @@ return [
         'ZA',
         'ZM',
         'ZW',
-    ],
-    'Alpha2ToAlpha3' => [
+        'XK',
+    ];
+
+    private const ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED = [
         'AW' => 'ABW',
         'AF' => 'AFG',
         'AO' => 'AGO',
@@ -517,259 +527,10 @@ return [
         'ZA' => 'ZAF',
         'ZM' => 'ZMB',
         'ZW' => 'ZWE',
-    ],
-    'Alpha3ToAlpha2' => [
-        'AND' => 'AD',
-        'ARE' => 'AE',
-        'AFG' => 'AF',
-        'ATG' => 'AG',
-        'AIA' => 'AI',
-        'ALB' => 'AL',
-        'ARM' => 'AM',
-        'AGO' => 'AO',
-        'ATA' => 'AQ',
-        'ARG' => 'AR',
-        'ASM' => 'AS',
-        'AUT' => 'AT',
-        'AUS' => 'AU',
-        'ABW' => 'AW',
-        'ALA' => 'AX',
-        'AZE' => 'AZ',
-        'BIH' => 'BA',
-        'BRB' => 'BB',
-        'BGD' => 'BD',
-        'BEL' => 'BE',
-        'BFA' => 'BF',
-        'BGR' => 'BG',
-        'BHR' => 'BH',
-        'BDI' => 'BI',
-        'BEN' => 'BJ',
-        'BLM' => 'BL',
-        'BMU' => 'BM',
-        'BRN' => 'BN',
-        'BOL' => 'BO',
-        'BES' => 'BQ',
-        'BRA' => 'BR',
-        'BHS' => 'BS',
-        'BTN' => 'BT',
-        'BVT' => 'BV',
-        'BWA' => 'BW',
-        'BLR' => 'BY',
-        'BLZ' => 'BZ',
-        'CAN' => 'CA',
-        'CCK' => 'CC',
-        'COD' => 'CD',
-        'CAF' => 'CF',
-        'COG' => 'CG',
-        'CHE' => 'CH',
-        'CIV' => 'CI',
-        'COK' => 'CK',
-        'CHL' => 'CL',
-        'CMR' => 'CM',
-        'CHN' => 'CN',
-        'COL' => 'CO',
-        'CRI' => 'CR',
-        'CUB' => 'CU',
-        'CPV' => 'CV',
-        'CUW' => 'CW',
-        'CXR' => 'CX',
-        'CYP' => 'CY',
-        'CZE' => 'CZ',
-        'DEU' => 'DE',
-        'DJI' => 'DJ',
-        'DNK' => 'DK',
-        'DMA' => 'DM',
-        'DOM' => 'DO',
-        'DZA' => 'DZ',
-        'ECU' => 'EC',
-        'EST' => 'EE',
-        'EGY' => 'EG',
-        'ESH' => 'EH',
-        'ERI' => 'ER',
-        'ESP' => 'ES',
-        'ETH' => 'ET',
-        'FIN' => 'FI',
-        'FJI' => 'FJ',
-        'FLK' => 'FK',
-        'FSM' => 'FM',
-        'FRO' => 'FO',
-        'FRA' => 'FR',
-        'GAB' => 'GA',
-        'GBR' => 'GB',
-        'GRD' => 'GD',
-        'GEO' => 'GE',
-        'GUF' => 'GF',
-        'GGY' => 'GG',
-        'GHA' => 'GH',
-        'GIB' => 'GI',
-        'GRL' => 'GL',
-        'GMB' => 'GM',
-        'GIN' => 'GN',
-        'GLP' => 'GP',
-        'GNQ' => 'GQ',
-        'GRC' => 'GR',
-        'SGS' => 'GS',
-        'GTM' => 'GT',
-        'GUM' => 'GU',
-        'GNB' => 'GW',
-        'GUY' => 'GY',
-        'HKG' => 'HK',
-        'HMD' => 'HM',
-        'HND' => 'HN',
-        'HRV' => 'HR',
-        'HTI' => 'HT',
-        'HUN' => 'HU',
-        'IDN' => 'ID',
-        'IRL' => 'IE',
-        'ISR' => 'IL',
-        'IMN' => 'IM',
-        'IND' => 'IN',
-        'IOT' => 'IO',
-        'IRQ' => 'IQ',
-        'IRN' => 'IR',
-        'ISL' => 'IS',
-        'ITA' => 'IT',
-        'JEY' => 'JE',
-        'JAM' => 'JM',
-        'JOR' => 'JO',
-        'JPN' => 'JP',
-        'KEN' => 'KE',
-        'KGZ' => 'KG',
-        'KHM' => 'KH',
-        'KIR' => 'KI',
-        'COM' => 'KM',
-        'KNA' => 'KN',
-        'PRK' => 'KP',
-        'KOR' => 'KR',
-        'KWT' => 'KW',
-        'CYM' => 'KY',
-        'KAZ' => 'KZ',
-        'LAO' => 'LA',
-        'LBN' => 'LB',
-        'LCA' => 'LC',
-        'LIE' => 'LI',
-        'LKA' => 'LK',
-        'LBR' => 'LR',
-        'LSO' => 'LS',
-        'LTU' => 'LT',
-        'LUX' => 'LU',
-        'LVA' => 'LV',
-        'LBY' => 'LY',
-        'MAR' => 'MA',
-        'MCO' => 'MC',
-        'MDA' => 'MD',
-        'MNE' => 'ME',
-        'MAF' => 'MF',
-        'MDG' => 'MG',
-        'MHL' => 'MH',
-        'MKD' => 'MK',
-        'MLI' => 'ML',
-        'MMR' => 'MM',
-        'MNG' => 'MN',
-        'MAC' => 'MO',
-        'MNP' => 'MP',
-        'MTQ' => 'MQ',
-        'MRT' => 'MR',
-        'MSR' => 'MS',
-        'MLT' => 'MT',
-        'MUS' => 'MU',
-        'MDV' => 'MV',
-        'MWI' => 'MW',
-        'MEX' => 'MX',
-        'MYS' => 'MY',
-        'MOZ' => 'MZ',
-        'NAM' => 'NA',
-        'NCL' => 'NC',
-        'NER' => 'NE',
-        'NFK' => 'NF',
-        'NGA' => 'NG',
-        'NIC' => 'NI',
-        'NLD' => 'NL',
-        'NOR' => 'NO',
-        'NPL' => 'NP',
-        'NRU' => 'NR',
-        'NIU' => 'NU',
-        'NZL' => 'NZ',
-        'OMN' => 'OM',
-        'PAN' => 'PA',
-        'PER' => 'PE',
-        'PYF' => 'PF',
-        'PNG' => 'PG',
-        'PHL' => 'PH',
-        'PAK' => 'PK',
-        'POL' => 'PL',
-        'SPM' => 'PM',
-        'PCN' => 'PN',
-        'PRI' => 'PR',
-        'PSE' => 'PS',
-        'PRT' => 'PT',
-        'PLW' => 'PW',
-        'PRY' => 'PY',
-        'QAT' => 'QA',
-        'REU' => 'RE',
-        'ROU' => 'RO',
-        'SRB' => 'RS',
-        'RUS' => 'RU',
-        'RWA' => 'RW',
-        'SAU' => 'SA',
-        'SLB' => 'SB',
-        'SYC' => 'SC',
-        'SDN' => 'SD',
-        'SWE' => 'SE',
-        'SGP' => 'SG',
-        'SHN' => 'SH',
-        'SVN' => 'SI',
-        'SJM' => 'SJ',
-        'SVK' => 'SK',
-        'SLE' => 'SL',
-        'SMR' => 'SM',
-        'SEN' => 'SN',
-        'SOM' => 'SO',
-        'SUR' => 'SR',
-        'SSD' => 'SS',
-        'STP' => 'ST',
-        'SLV' => 'SV',
-        'SXM' => 'SX',
-        'SYR' => 'SY',
-        'SWZ' => 'SZ',
-        'TCA' => 'TC',
-        'TCD' => 'TD',
-        'ATF' => 'TF',
-        'TGO' => 'TG',
-        'THA' => 'TH',
-        'TJK' => 'TJ',
-        'TKL' => 'TK',
-        'TLS' => 'TL',
-        'TKM' => 'TM',
-        'TUN' => 'TN',
-        'TON' => 'TO',
-        'TUR' => 'TR',
-        'TTO' => 'TT',
-        'TUV' => 'TV',
-        'TWN' => 'TW',
-        'TZA' => 'TZ',
-        'UKR' => 'UA',
-        'UGA' => 'UG',
-        'UMI' => 'UM',
-        'USA' => 'US',
-        'URY' => 'UY',
-        'UZB' => 'UZ',
-        'VAT' => 'VA',
-        'VCT' => 'VC',
-        'VEN' => 'VE',
-        'VGB' => 'VG',
-        'VIR' => 'VI',
-        'VNM' => 'VN',
-        'VUT' => 'VU',
-        'WLF' => 'WF',
-        'WSM' => 'WS',
-        'YEM' => 'YE',
-        'MYT' => 'YT',
-        'ZAF' => 'ZA',
-        'ZMB' => 'ZM',
-        'ZWE' => 'ZW',
-    ],
-    'Alpha2ToNumeric' => [
+        'XK' => 'XKK',
+    ];
+
+    private const ALPHA2_TO_NUMERIC_WITH_USER_ASSIGNED = [
         'AD' => '020',
         'AE' => '784',
         'AF' => '004',
@@ -1019,256 +780,231 @@ return [
         'ZA' => '710',
         'ZM' => '894',
         'ZW' => '716',
-    ],
-    'NumericToAlpha2' => [
-        '_020' => 'AD',
-        '_784' => 'AE',
-        '_004' => 'AF',
-        '_028' => 'AG',
-        '_660' => 'AI',
-        '_008' => 'AL',
-        '_051' => 'AM',
-        '_024' => 'AO',
-        '_010' => 'AQ',
-        '_032' => 'AR',
-        '_016' => 'AS',
-        '_040' => 'AT',
-        '_036' => 'AU',
-        '_533' => 'AW',
-        '_248' => 'AX',
-        '_031' => 'AZ',
-        '_070' => 'BA',
-        '_052' => 'BB',
-        '_050' => 'BD',
-        '_056' => 'BE',
-        '_854' => 'BF',
-        '_100' => 'BG',
-        '_048' => 'BH',
-        '_108' => 'BI',
-        '_204' => 'BJ',
-        '_652' => 'BL',
-        '_060' => 'BM',
-        '_096' => 'BN',
-        '_068' => 'BO',
-        '_535' => 'BQ',
-        '_076' => 'BR',
-        '_044' => 'BS',
-        '_064' => 'BT',
-        '_074' => 'BV',
-        '_072' => 'BW',
-        '_112' => 'BY',
-        '_084' => 'BZ',
-        '_124' => 'CA',
-        '_166' => 'CC',
-        '_180' => 'CD',
-        '_140' => 'CF',
-        '_178' => 'CG',
-        '_756' => 'CH',
-        '_384' => 'CI',
-        '_184' => 'CK',
-        '_152' => 'CL',
-        '_120' => 'CM',
-        '_156' => 'CN',
-        '_170' => 'CO',
-        '_188' => 'CR',
-        '_192' => 'CU',
-        '_132' => 'CV',
-        '_531' => 'CW',
-        '_162' => 'CX',
-        '_196' => 'CY',
-        '_203' => 'CZ',
-        '_276' => 'DE',
-        '_262' => 'DJ',
-        '_208' => 'DK',
-        '_212' => 'DM',
-        '_214' => 'DO',
-        '_012' => 'DZ',
-        '_218' => 'EC',
-        '_233' => 'EE',
-        '_818' => 'EG',
-        '_732' => 'EH',
-        '_232' => 'ER',
-        '_724' => 'ES',
-        '_231' => 'ET',
-        '_246' => 'FI',
-        '_242' => 'FJ',
-        '_238' => 'FK',
-        '_583' => 'FM',
-        '_234' => 'FO',
-        '_250' => 'FR',
-        '_266' => 'GA',
-        '_826' => 'GB',
-        '_308' => 'GD',
-        '_268' => 'GE',
-        '_254' => 'GF',
-        '_831' => 'GG',
-        '_288' => 'GH',
-        '_292' => 'GI',
-        '_304' => 'GL',
-        '_270' => 'GM',
-        '_324' => 'GN',
-        '_312' => 'GP',
-        '_226' => 'GQ',
-        '_300' => 'GR',
-        '_239' => 'GS',
-        '_320' => 'GT',
-        '_316' => 'GU',
-        '_624' => 'GW',
-        '_328' => 'GY',
-        '_344' => 'HK',
-        '_334' => 'HM',
-        '_340' => 'HN',
-        '_191' => 'HR',
-        '_332' => 'HT',
-        '_348' => 'HU',
-        '_360' => 'ID',
-        '_372' => 'IE',
-        '_376' => 'IL',
-        '_833' => 'IM',
-        '_356' => 'IN',
-        '_086' => 'IO',
-        '_368' => 'IQ',
-        '_364' => 'IR',
-        '_352' => 'IS',
-        '_380' => 'IT',
-        '_832' => 'JE',
-        '_388' => 'JM',
-        '_400' => 'JO',
-        '_392' => 'JP',
-        '_404' => 'KE',
-        '_417' => 'KG',
-        '_116' => 'KH',
-        '_296' => 'KI',
-        '_174' => 'KM',
-        '_659' => 'KN',
-        '_408' => 'KP',
-        '_410' => 'KR',
-        '_414' => 'KW',
-        '_136' => 'KY',
-        '_398' => 'KZ',
-        '_418' => 'LA',
-        '_422' => 'LB',
-        '_662' => 'LC',
-        '_438' => 'LI',
-        '_144' => 'LK',
-        '_430' => 'LR',
-        '_426' => 'LS',
-        '_440' => 'LT',
-        '_442' => 'LU',
-        '_428' => 'LV',
-        '_434' => 'LY',
-        '_504' => 'MA',
-        '_492' => 'MC',
-        '_498' => 'MD',
-        '_499' => 'ME',
-        '_663' => 'MF',
-        '_450' => 'MG',
-        '_584' => 'MH',
-        '_807' => 'MK',
-        '_466' => 'ML',
-        '_104' => 'MM',
-        '_496' => 'MN',
-        '_446' => 'MO',
-        '_580' => 'MP',
-        '_474' => 'MQ',
-        '_478' => 'MR',
-        '_500' => 'MS',
-        '_470' => 'MT',
-        '_480' => 'MU',
-        '_462' => 'MV',
-        '_454' => 'MW',
-        '_484' => 'MX',
-        '_458' => 'MY',
-        '_508' => 'MZ',
-        '_516' => 'NA',
-        '_540' => 'NC',
-        '_562' => 'NE',
-        '_574' => 'NF',
-        '_566' => 'NG',
-        '_558' => 'NI',
-        '_528' => 'NL',
-        '_578' => 'NO',
-        '_524' => 'NP',
-        '_520' => 'NR',
-        '_570' => 'NU',
-        '_554' => 'NZ',
-        '_512' => 'OM',
-        '_591' => 'PA',
-        '_604' => 'PE',
-        '_258' => 'PF',
-        '_598' => 'PG',
-        '_608' => 'PH',
-        '_586' => 'PK',
-        '_616' => 'PL',
-        '_666' => 'PM',
-        '_612' => 'PN',
-        '_630' => 'PR',
-        '_275' => 'PS',
-        '_620' => 'PT',
-        '_585' => 'PW',
-        '_600' => 'PY',
-        '_634' => 'QA',
-        '_638' => 'RE',
-        '_642' => 'RO',
-        '_688' => 'RS',
-        '_643' => 'RU',
-        '_646' => 'RW',
-        '_682' => 'SA',
-        '_090' => 'SB',
-        '_690' => 'SC',
-        '_729' => 'SD',
-        '_752' => 'SE',
-        '_702' => 'SG',
-        '_654' => 'SH',
-        '_705' => 'SI',
-        '_744' => 'SJ',
-        '_703' => 'SK',
-        '_694' => 'SL',
-        '_674' => 'SM',
-        '_686' => 'SN',
-        '_706' => 'SO',
-        '_740' => 'SR',
-        '_728' => 'SS',
-        '_678' => 'ST',
-        '_222' => 'SV',
-        '_534' => 'SX',
-        '_760' => 'SY',
-        '_748' => 'SZ',
-        '_796' => 'TC',
-        '_148' => 'TD',
-        '_260' => 'TF',
-        '_768' => 'TG',
-        '_764' => 'TH',
-        '_762' => 'TJ',
-        '_772' => 'TK',
-        '_626' => 'TL',
-        '_795' => 'TM',
-        '_788' => 'TN',
-        '_776' => 'TO',
-        '_792' => 'TR',
-        '_780' => 'TT',
-        '_798' => 'TV',
-        '_158' => 'TW',
-        '_834' => 'TZ',
-        '_804' => 'UA',
-        '_800' => 'UG',
-        '_581' => 'UM',
-        '_840' => 'US',
-        '_858' => 'UY',
-        '_860' => 'UZ',
-        '_336' => 'VA',
-        '_670' => 'VC',
-        '_862' => 'VE',
-        '_092' => 'VG',
-        '_850' => 'VI',
-        '_704' => 'VN',
-        '_548' => 'VU',
-        '_876' => 'WF',
-        '_882' => 'WS',
-        '_887' => 'YE',
-        '_175' => 'YT',
-        '_710' => 'ZA',
-        '_894' => 'ZM',
-        '_716' => 'ZW',
-    ],
-];
+        'XK' => '983',
+    ];
+
+    public static function setUpBeforeClass(): void
+    {
+        // @see CountriesEnvVarTest for ENV var interaction
+        Countries::withUserAssigned(true);
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        // we are not interested in SYMFONY_INTL_WITH_USER_ASSIGNED outside this test class
+        Countries::withUserAssigned(false);
+    }
+
+    public function testAllGettersGenerateTheSameDataSetCount(): void
+    {
+        $expected = count(self::COUNTRIES_WITH_USER_ASSIGNED);
+        $alpha2Count = count(Countries::getCountryCodes());
+        $alpha3Count = count(Countries::getAlpha3Codes());
+        $numericCodesCount = count(Countries::getNumericCodes());
+        $namesCount = count(Countries::getNames());
+
+        // we compare against our test list to check that optional user assigned is included
+        $this->assertEquals($expected, $namesCount, 'Names count does not match');
+        $this->assertEquals($expected, $alpha2Count, 'Alpha 2 count does not match');
+        $this->assertEquals($expected, $alpha3Count, 'Alpha 3 count does not match');
+        $this->assertEquals($expected, $numericCodesCount, 'Numeric codes count does not match');
+    }
+
+    public function testGetCountryCodes(): void
+    {
+        $this->assertSame(self::COUNTRIES_WITH_USER_ASSIGNED, Countries::getCountryCodes());
+    }
+
+    /**
+     * @dataProvider provideLocales
+     */
+    public function testGetNames($displayLocale): void
+    {
+        if ('en' !== $displayLocale) {
+            IntlTestHelper::requireFullIntl($this);
+        }
+
+        $countries = array_keys(Countries::getNames($displayLocale));
+
+        // Can't use assertSame(), because country names differ in different locales
+        // we want to know that both arrays are canonically equal though
+        $this->assertEqualsCanonicalizing(self::COUNTRIES_WITH_USER_ASSIGNED, $countries);
+    }
+
+    /**
+     * This test is for backward compatibility. testGetNames already checks `XK` is included
+     *
+     * @dataProvider provideLocaleAliases
+     */
+    public function testGetNamesSupportsAliases($alias, $ofLocale): void
+    {
+        if ('en' !== $ofLocale) {
+            IntlTestHelper::requireFullIntl($this);
+        }
+
+        // Can't use assertSame(), because some aliases contain scripts with
+        // different collation (=order of output) than their aliased locale
+        // e.g. sr_Latn_ME => sr_ME
+        $this->assertEquals(Countries::getNames($ofLocale), Countries::getNames($alias));
+    }
+
+    /**
+     * This test is for backward compatibility. testGetNames already checks `XK` is included
+     *
+     * @dataProvider provideLocales
+     */
+    public function testGetName($displayLocale)
+    {
+        if ('en' !== $displayLocale) {
+            IntlTestHelper::requireFullIntl($this);
+        }
+
+        $names = Countries::getNames($displayLocale);
+
+        foreach ($names as $country => $name) {
+            $this->assertSame($name, Countries::getName($country, $displayLocale));
+        }
+    }
+
+    /**
+     * @requires extension intl
+     */
+    public function testLocaleAliasesAreLoaded()
+    {
+        \Locale::setDefault('zh_TW');
+        $countryNameZhTw = Countries::getName('AD');
+
+        \Locale::setDefault('zh_Hant_TW');
+        $countryNameHantZhTw = Countries::getName('AD');
+
+        \Locale::setDefault('zh');
+        $countryNameZh = Countries::getName('AD');
+
+        $this->assertSame($countryNameZhTw, $countryNameHantZhTw, 'zh_TW is an alias to zh_Hant_TW');
+        $this->assertNotSame($countryNameZh, $countryNameZhTw, 'zh_TW does not fall back to zh');
+    }
+
+    public function testGetNameWithInvalidCountryCode(): void
+    {
+        $this->expectException(MissingResourceException::class);
+        Countries::getName('PAL'); // PSE is commonly confused with PAL
+    }
+
+    public function testExists(): void
+    {
+        $this->assertTrue(Countries::exists('NL'));
+        $this->assertTrue(Countries::exists('XK'));
+        $this->assertFalse(Countries::exists('ZZ'));
+    }
+
+    public function testGetAlpha3Codes(): void
+    {
+        $this->assertSame(self::ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED, Countries::getAlpha3Codes());
+    }
+
+    public function testGetAlpha3Code(): void
+    {
+        foreach (self::COUNTRIES_WITH_USER_ASSIGNED as $country) {
+            $this->assertSame(self::ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED[$country], Countries::getAlpha3Code($country));
+        }
+    }
+
+    public function testGetAlpha2Code(): void
+    {
+        foreach (self::COUNTRIES_WITH_USER_ASSIGNED as $alpha2Code) {
+            $alpha3Code = self::ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED[$alpha2Code];
+            $this->assertSame($alpha2Code, Countries::getAlpha2Code($alpha3Code));
+        }
+    }
+
+    public function testAlpha3CodeExists(): void
+    {
+        $this->assertTrue(Countries::alpha3CodeExists('ALB'));
+        $this->assertTrue(Countries::alpha3CodeExists('DEU'));
+        $this->assertTrue(Countries::alpha3CodeExists('XKK'));
+        $this->assertFalse(Countries::alpha3CodeExists('DE'));
+        $this->assertFalse(Countries::alpha3CodeExists('URU'));
+        $this->assertFalse(Countries::alpha3CodeExists('ZZZ'));
+    }
+
+    /**
+     * @dataProvider provideLocales
+     */
+    public function testGetAlpha3Name($displayLocale): void
+    {
+        if ('en' !== $displayLocale) {
+            IntlTestHelper::requireFullIntl($this);
+        }
+
+        $names = Countries::getNames($displayLocale);
+
+        foreach ($names as $alpha2 => $name) {
+            $alpha3 = self::ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED[$alpha2];
+            $this->assertSame($name, Countries::getAlpha3Name($alpha3, $displayLocale));
+        }
+    }
+
+    public function testGetAlpha3NameWithInvalidCountryCode(): void
+    {
+        $this->expectException(MissingResourceException::class);
+
+        Countries::getAlpha3Name('ZZZ');
+    }
+
+    /**
+     * @dataProvider provideLocales
+     */
+    public function testGetAlpha3Names($displayLocale)
+    {
+        if ('en' !== $displayLocale) {
+            IntlTestHelper::requireFullIntl($this);
+        }
+
+        $names = Countries::getAlpha3Names($displayLocale);
+
+        $alpha3Codes = array_keys($names);
+        $this->assertEqualsCanonicalizing(array_values(self::ALPHA2_TO_ALPHA3_WITH_USER_ASSIGNED), $alpha3Codes);
+
+        $alpha2Names = Countries::getNames($displayLocale);
+        $this->assertEqualsCanonicalizing(array_values($alpha2Names), array_values($names));
+    }
+
+    public function testGetNumericCodes(): void
+    {
+        $this->assertSame(self::ALPHA2_TO_NUMERIC_WITH_USER_ASSIGNED, Countries::getNumericCodes());
+    }
+
+    public function testGetNumericCode(): void
+    {
+        foreach (self::COUNTRIES_WITH_USER_ASSIGNED as $country) {
+            $this->assertSame(self::ALPHA2_TO_NUMERIC_WITH_USER_ASSIGNED[$country], Countries::getNumericCode($country));
+        }
+    }
+
+    public function testNumericCodeExists(): void
+    {
+        $this->assertTrue(Countries::numericCodeExists('250'));
+        $this->assertTrue(Countries::numericCodeExists('008'));
+        $this->assertTrue(Countries::numericCodeExists('716'));
+        $this->assertTrue(Countries::numericCodeExists('983')); // this is `XK`
+        $this->assertFalse(Countries::numericCodeExists('667'));
+    }
+
+    public function testGetAlpha2FromNumeric(): void
+    {
+        $alpha2Lookup = array_flip(self::ALPHA2_TO_NUMERIC_WITH_USER_ASSIGNED);
+
+        foreach (self::ALPHA2_TO_NUMERIC_WITH_USER_ASSIGNED as $numeric) {
+            $this->assertSame($alpha2Lookup[$numeric], Countries::getAlpha2FromNumeric($numeric));
+        }
+    }
+
+    public function testNumericCodesDoNotContainDenyListItems(): void
+    {
+        $numericCodes = Countries::getNumericCodes();
+
+        $this->assertArrayNotHasKey('EZ', $numericCodes);
+        $this->assertArrayNotHasKey('XA', $numericCodes);
+        $this->assertArrayNotHasKey('ZZ', $numericCodes);
+    }
+}
