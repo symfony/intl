@@ -797,11 +797,11 @@ class CountriesWithUserAssignedTest extends ResourceBundleTestCase
 
     public function testAllGettersGenerateTheSameDataSetCount(): void
     {
-        $expected = count(self::COUNTRIES_WITH_USER_ASSIGNED);
-        $alpha2Count = count(Countries::getCountryCodes());
-        $alpha3Count = count(Countries::getAlpha3Codes());
-        $numericCodesCount = count(Countries::getNumericCodes());
-        $namesCount = count(Countries::getNames());
+        $expected = \count(self::COUNTRIES_WITH_USER_ASSIGNED);
+        $alpha2Count = \count(Countries::getCountryCodes());
+        $alpha3Count = \count(Countries::getAlpha3Codes());
+        $numericCodesCount = \count(Countries::getNumericCodes());
+        $namesCount = \count(Countries::getNames());
 
         // we compare against our test list to check that optional user assigned is included
         $this->assertEquals($expected, $namesCount, 'Names count does not match');
@@ -832,7 +832,7 @@ class CountriesWithUserAssignedTest extends ResourceBundleTestCase
     }
 
     /**
-     * This test is for backward compatibility. testGetNames already checks `XK` is included
+     * This test is for backward compatibility; testGetNames already checks `XK` is included.
      *
      * @dataProvider provideLocaleAliases
      */
@@ -849,7 +849,7 @@ class CountriesWithUserAssignedTest extends ResourceBundleTestCase
     }
 
     /**
-     * This test is for backward compatibility. testGetNames already checks `XK` is included
+     * This test is for backward compatibility; testGetNames already checks `XK` is included.
      *
      * @dataProvider provideLocales
      */

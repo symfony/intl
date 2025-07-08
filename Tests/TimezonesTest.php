@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Intl\Tests;
 
-use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Timezones;
 use Symfony\Component\Intl\Util\IntlTestHelper;

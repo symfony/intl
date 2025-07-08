@@ -780,10 +780,10 @@ class CountriesTest extends ResourceBundleTestCase
 
     public function testAllGettersGenerateTheSameDataSetCount()
     {
-        $alpha2Count = count(Countries::getCountryCodes());
-        $alpha3Count = count(Countries::getAlpha3Codes());
-        $numericCodesCount = count(Countries::getNumericCodes());
-        $namesCount = count(Countries::getNames());
+        $alpha2Count = \count(Countries::getCountryCodes());
+        $alpha3Count = \count(Countries::getAlpha3Codes());
+        $numericCodesCount = \count(Countries::getNumericCodes());
+        $namesCount = \count(Countries::getNames());
 
         // we base all on Name count since it is the first to be generated
         $this->assertEquals($namesCount, $alpha2Count, 'Alpha 2 count does not match');
