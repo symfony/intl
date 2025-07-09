@@ -234,7 +234,7 @@ final class Countries extends ResourceBundle
     public static function withUserAssigned(?bool $withUserAssigned = null): bool
     {
         if (null === $withUserAssigned) {
-            return self::$withUserAssigned ??= filter_var($_ENV['SYMFONY_INTL_WITH_USER_ASSIGNED'] ?? $_SERVER['SYMFONY_INTL_WITH_USER_ASSIGNED'] ?? getenv('SYMFONY_INTL_WITH_USER_ASSIGNED'), FILTER_VALIDATE_BOOLEAN);
+            return self::$withUserAssigned ??= filter_var($_ENV['SYMFONY_INTL_WITH_USER_ASSIGNED'] ?? $_SERVER['SYMFONY_INTL_WITH_USER_ASSIGNED'] ?? getenv('SYMFONY_INTL_WITH_USER_ASSIGNED'), \FILTER_VALIDATE_BOOLEAN);
         }
 
         return self::$withUserAssigned = $withUserAssigned;
