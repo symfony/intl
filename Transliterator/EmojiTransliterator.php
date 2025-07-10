@@ -14,7 +14,7 @@ namespace Symfony\Component\Intl\Transliterator;
 use Symfony\Component\Intl\Util\GzipStreamWrapper;
 
 if (!class_exists(\Transliterator::class)) {
-    throw new \LogicException(sprintf('You cannot use the "%s\EmojiTransliterator" class as the "intl" extension is not installed. See https://php.net/intl.', __NAMESPACE__));
+    throw new \LogicException(\sprintf('You cannot use the "%s\EmojiTransliterator" class as the "intl" extension is not installed. See https://php.net/intl.', __NAMESPACE__));
 } else {
     /**
      * @internal
@@ -57,7 +57,7 @@ if (!class_exists(\Transliterator::class)) {
                 $instance = ($newInstance ??= (new \ReflectionClass(self::class))->newInstanceWithoutConstructor(...))();
                 $instance->id = $id;
             } else {
-                $instance = unserialize(sprintf('O:%d:"%s":1:{s:2:"id";s:%d:"%s";}', \strlen(self::class), self::class, \strlen($id), $id));
+                $instance = unserialize(\sprintf('O:%d:"%s":1:{s:2:"id";s:%d:"%s";}', \strlen(self::class), self::class, \strlen($id), $id));
             }
 
             $instance->map = $maps[$id] ??= str_ends_with($file, '.gz') ? GzipStreamWrapper::require($file) : require $file;
