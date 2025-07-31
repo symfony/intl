@@ -11,13 +11,13 @@
 
 namespace Symfony\Component\Intl\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Timezones;
 use Symfony\Component\Intl\Util\IntlTestHelper;
 
-/**
- * @group intl-data
- */
+#[Group('intl-data')]
 class TimezonesTest extends ResourceBundleTestCase
 {
     // The below arrays document the state of the ICU data bundled with this package.
@@ -710,9 +710,7 @@ class TimezonesTest extends ResourceBundleTestCase
         $this->assertEquals(self::ZONES, Timezones::getIds());
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    #[DataProvider('provideLocales')]
     public function testGetNames($displayLocale)
     {
         if ('en' !== $displayLocale) {
@@ -736,9 +734,7 @@ class TimezonesTest extends ResourceBundleTestCase
         $this->assertSame(Timezones::getNames('de_AT'), Timezones::getNames());
     }
 
-    /**
-     * @dataProvider provideLocaleAliases
-     */
+    #[DataProvider('provideLocaleAliases')]
     public function testGetNamesSupportsAliases($alias, $ofLocale)
     {
         if ('en' !== $ofLocale) {
@@ -751,9 +747,7 @@ class TimezonesTest extends ResourceBundleTestCase
         $this->assertEquals(Timezones::getNames($ofLocale), Timezones::getNames($alias));
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    #[DataProvider('provideLocales')]
     public function testGetName($displayLocale)
     {
         if ('en' !== $displayLocale) {
@@ -861,9 +855,7 @@ class TimezonesTest extends ResourceBundleTestCase
         Timezones::getCountryCode('foobar');
     }
 
-    /**
-     * @dataProvider provideTimezones
-     */
+    #[DataProvider('provideTimezones')]
     public function testGetGmtOffsetAvailability(string $timezone)
     {
         try {
@@ -879,9 +871,7 @@ class TimezonesTest extends ResourceBundleTestCase
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @dataProvider provideTimezones
-     */
+    #[DataProvider('provideTimezones')]
     public function testGetCountryCodeAvailability(string $timezone)
     {
         try {
@@ -903,9 +893,7 @@ class TimezonesTest extends ResourceBundleTestCase
         return array_map(fn ($timezone) => [$timezone], self::ZONES);
     }
 
-    /**
-     * @dataProvider provideCountries
-     */
+    #[DataProvider('provideCountries')]
     public function testForCountryCodeAvailability(string $country)
     {
         // ensure each country code has a list of timezone identifiers (possibly empty)

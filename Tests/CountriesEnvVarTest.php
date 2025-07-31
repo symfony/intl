@@ -11,28 +11,27 @@
 
 namespace Symfony\Component\Intl\Tests;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Intl\Countries;
 
-/**
- * @group intl-data
- * @group intl-data-isolate
- */
+#[Group('intl-data')]
+#[Group('intl-data-isolate')]
 class CountriesEnvVarTest extends TestCase
 {
-    public function testWhenEnvVarNotSet(): void
+    public function testWhenEnvVarNotSet()
     {
         $this->assertFalse(Countries::exists('XK'));
     }
 
-    public function testWhenEnvVarSetFalse(): void
+    public function testWhenEnvVarSetFalse()
     {
         putenv('SYMFONY_INTL_WITH_USER_ASSIGNED=false');
 
         $this->assertFalse(Countries::exists('XK'));
     }
 
-    public function testWhenEnvVarSetTrue(): void
+    public function testWhenEnvVarSetTrue()
     {
         putenv('SYMFONY_INTL_WITH_USER_ASSIGNED=true');
 

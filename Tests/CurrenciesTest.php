@@ -11,13 +11,13 @@
 
 namespace Symfony\Component\Intl\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Util\IntlTestHelper;
 
-/**
- * @group intl-data
- */
+#[Group('intl-data')]
 class CurrenciesTest extends ResourceBundleTestCase
 {
     // The below arrays document the state of the ICU data bundled with this package.
@@ -598,9 +598,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->assertSame(self::CURRENCIES, Currencies::getCurrencyCodes());
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    #[DataProvider('provideLocales')]
     public function testGetNames($displayLocale)
     {
         if ('en' !== $displayLocale) {
@@ -632,9 +630,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->assertSame(Currencies::getNames('de_AT'), Currencies::getNames());
     }
 
-    /**
-     * @dataProvider provideLocaleAliases
-     */
+    #[DataProvider('provideLocaleAliases')]
     public function testGetNamesSupportsAliases($alias, $ofLocale)
     {
         if ('en' !== $ofLocale) {
@@ -647,9 +643,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->assertEquals(Currencies::getNames($ofLocale), Currencies::getNames($alias));
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    #[DataProvider('provideLocales')]
     public function testGetName($displayLocale)
     {
         if ('en' !== $displayLocale) {
@@ -682,9 +676,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    #[DataProvider('provideLocales')]
     public function testGetSymbol($displayLocale)
     {
         $currencies = Currencies::getCurrencyCodes();
@@ -702,9 +694,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         );
     }
 
-    /**
-     * @dataProvider provideCurrencies
-     */
+    #[DataProvider('provideCurrencies')]
     public function testGetFractionDigits($currency)
     {
         // ensure each currency code has a corresponding fraction digit
@@ -713,9 +703,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @dataProvider provideCurrencies
-     */
+    #[DataProvider('provideCurrencies')]
     public function testGetRoundingIncrement($currency)
     {
         $this->assertIsNumeric(Currencies::getRoundingIncrement($currency));
@@ -729,9 +717,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         );
     }
 
-    /**
-     * @dataProvider provideCurrenciesWithNumericEquivalent
-     */
+    #[DataProvider('provideCurrenciesWithNumericEquivalent')]
     public function testGetNumericCode($currency)
     {
         $this->assertSame(self::ALPHA3_TO_NUMERIC[$currency], Currencies::getNumericCode($currency));
@@ -745,9 +731,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         );
     }
 
-    /**
-     * @dataProvider provideCurrenciesWithoutNumericEquivalent
-     */
+    #[DataProvider('provideCurrenciesWithoutNumericEquivalent')]
     public function testGetNumericCodeFailsIfNoNumericEquivalent($currency)
     {
         $this->expectException(MissingResourceException::class);
@@ -765,9 +749,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         );
     }
 
-    /**
-     * @dataProvider provideValidNumericCodes
-     */
+    #[DataProvider('provideValidNumericCodes')]
     public function testForNumericCode($numeric, $expected)
     {
         $actual = Currencies::forNumericCode($numeric);
@@ -790,9 +772,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         );
     }
 
-    /**
-     * @dataProvider provideInvalidNumericCodes
-     */
+    #[DataProvider('provideInvalidNumericCodes')]
     public function testForNumericCodeFailsIfInvalidNumericCode($currency)
     {
         $this->expectException(MissingResourceException::class);
