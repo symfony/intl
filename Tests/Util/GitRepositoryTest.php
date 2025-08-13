@@ -40,7 +40,7 @@ class GitRepositoryTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        @mkdir($this->targetDir, 0777, true);
+        @mkdir($this->targetDir, 0o777, true);
 
         new GitRepository($this->targetDir);
     }
