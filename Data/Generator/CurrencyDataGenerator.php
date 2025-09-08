@@ -232,11 +232,6 @@ class CurrencyDataGenerator extends AbstractDataGenerator
         // Recompose a 64-bit unsigned integer from two 32-bit chunks.
         $unsigned64 = ((($highBits32 & 0xFFFFFFFF) << 32) | ($lowBits32 & 0xFFFFFFFF));
 
-        // Convert to signed 64-bit (two's complement) if sign bit is set.
-        if ($unsigned64 >= (1 << 63)) {
-            $unsigned64 -= (1 << 64);
-        }
-
         // Split into seconds and milliseconds.
         $seconds = intdiv($unsigned64, 1000);
         $millisecondsRemainder = $unsigned64 - $seconds * 1000;
