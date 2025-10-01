@@ -225,10 +225,10 @@ final class Currencies extends ResourceBundle
             throw new \RuntimeException("Cannot check whether the currency $currency is active or not in $country because they are no validity dates available.");
         }
 
-        $from = \DateTimeImmutable::createFromFormat('Y-m-d', $currencyMetadata['from']);
+        $from = \DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s', $currencyMetadata['from'], new \DateTimeZone('Etc/UTC'));
 
         if (\array_key_exists('to', $currencyMetadata)) {
-            $to = \DateTimeImmutable::createFromFormat('Y-m-d', $currencyMetadata['to']);
+            $to = \DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s', $currencyMetadata['to'], new \DateTimeZone('Etc/UTC'));
         } else {
             $to = null;
         }
