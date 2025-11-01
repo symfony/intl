@@ -866,12 +866,14 @@ class CurrenciesTest extends ResourceBundleTestCase
         $this->assertFalse(Currencies::isValidInCountry('CH', 'CHF', false, null));
     }
 
-    public function testCheCurrencyDoesNotHaveValidityDatesInSwitzerland()
+    public function testCheCurrencyIncluded()
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Cannot check whether the currency CHE is active or not in CH because they are no validity dates available.');
+        $this->assertTrue(Currencies::isValidInCountry('CH', 'CHE', false, true, includeUndated: true));
+    }
 
-        Currencies::isValidInCountry('CH', 'CHE', false, false);
+    public function testCheCurrencyExcluded()
+    {
+        $this->assertFalse(Currencies::isValidInCountry('CH', 'CHE', false, true, includeUndated: false));
     }
 
     /**
