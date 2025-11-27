@@ -455,6 +455,7 @@ class CurrenciesTest extends ResourceBundleTestCase
         'NPR' => 524,
         'NLG' => 528,
         'ANG' => 532,
+        'XCG' => 532,
         'AWG' => 533,
         'VUV' => 548,
         'NZD' => 554,
