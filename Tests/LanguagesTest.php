@@ -1788,7 +1788,7 @@ class LanguagesTest extends ResourceBundleTestCase
     public static function provideLanguagesWithAlpha3Equivalent()
     {
         return array_map(
-            fn ($value) => [$value],
+            static fn ($value) => [$value],
             array_keys(self::ALPHA2_TO_ALPHA3)
         );
     }
@@ -1802,7 +1802,7 @@ class LanguagesTest extends ResourceBundleTestCase
     public static function provideLanguagesWithoutAlpha3Equivalent()
     {
         return array_map(
-            fn ($value) => [$value],
+            static fn ($value) => [$value],
             array_diff(self::LANGUAGES, array_keys(self::ALPHA2_TO_ALPHA3))
         );
     }
@@ -1834,7 +1834,7 @@ class LanguagesTest extends ResourceBundleTestCase
     public static function provideLanguagesWithAlpha2Equivalent()
     {
         return array_map(
-            fn ($value) => [$value],
+            static fn ($value) => [$value],
             array_keys(self::ALPHA3_TO_ALPHA2)
         );
     }
@@ -1848,7 +1848,7 @@ class LanguagesTest extends ResourceBundleTestCase
     public static function provideLanguagesWithoutAlpha2Equivalent()
     {
         return array_map(
-            fn ($value) => [$value],
+            static fn ($value) => [$value],
             array_diff(self::ALPHA3_CODES, array_keys(self::ALPHA3_TO_ALPHA2))
         );
     }
