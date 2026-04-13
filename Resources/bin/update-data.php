@@ -172,7 +172,7 @@ echo "Preparing resource bundle compilation (version $icuVersionInDownload)...\n
 
 $compiler = new GenrbCompiler($genrb, $genrbEnv);
 $config = new GeneratorConfig($sourceDir.'/data', $icuVersionInDownload);
-$dataDir = dirname(__DIR__).'/data';
+$dataDir = \dirname(__DIR__).'/data';
 
 $config->addBundleWriter($dataDir, new PhpBundleWriter());
 

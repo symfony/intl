@@ -13,9 +13,9 @@ if ('cli' !== \PHP_SAPI) {
     throw new Exception('This script must be run from the command line.');
 }
 
-define('LINE_WIDTH', 75);
+\define('LINE_WIDTH', 75);
 
-define('LINE', str_repeat('-', LINE_WIDTH)."\n");
+\define('LINE', str_repeat('-', LINE_WIDTH)."\n");
 
 function bailout(string $message): void
 {
@@ -39,7 +39,7 @@ function strip_minor_versions(string $version)
  */
 function centered(string $text)
 {
-    $padding = (int) ((LINE_WIDTH - strlen($text)) / 2);
+    $padding = (int) ((LINE_WIDTH - \strlen($text)) / 2);
 
     return str_repeat(' ', $padding).$text;
 }
