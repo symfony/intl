@@ -798,7 +798,7 @@ abstract class ResourceBundleTestCase extends TestCase
     public static function provideLocales()
     {
         return array_map(
-            fn ($locale) => [$locale],
+            static fn ($locale) => [$locale],
             static::getLocales()
         );
     }
@@ -806,7 +806,7 @@ abstract class ResourceBundleTestCase extends TestCase
     public static function provideLocaleAliases()
     {
         return array_map(
-            fn ($alias, $ofLocale) => [$alias, $ofLocale],
+            static fn ($alias, $ofLocale) => [$alias, $ofLocale],
             array_keys(static::getLocaleAliases()),
             static::getLocaleAliases()
         );
@@ -815,7 +815,7 @@ abstract class ResourceBundleTestCase extends TestCase
     public static function provideRootLocales()
     {
         return array_map(
-            fn ($locale) => [$locale],
+            static fn ($locale) => [$locale],
             static::getRootLocales()
         );
     }
@@ -833,7 +833,7 @@ abstract class ResourceBundleTestCase extends TestCase
     protected static function getRootLocales()
     {
         if (null === self::$rootLocales) {
-            self::$rootLocales = array_filter(static::getLocales(), fn ($locale) => // no locales for which fallback is possible (e.g "en_GB")
+            self::$rootLocales = array_filter(static::getLocales(), static fn ($locale) => // no locales for which fallback is possible (e.g "en_GB")
 !str_contains($locale, '_'));
         }
 

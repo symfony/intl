@@ -88,7 +88,7 @@ final class Builder
                 }
                 $parts = preg_split('//u', $emoji, -1, \PREG_SPLIT_NO_EMPTY);
                 $emojiCodePoints = implode(' ', array_map('dechex', array_map('mb_ord', $parts)));
-                if (!array_key_exists($emojiCodePoints, $emojisCodePoints)) {
+                if (!\array_key_exists($emojiCodePoints, $emojisCodePoints)) {
                     $ignored[] = [
                         'locale' => $locale,
                         'emoji' => $emoji,
@@ -135,7 +135,7 @@ final class Builder
 
         foreach ($emojis as $shortCode => $url) {
             $emojiCodePoints = str_replace('-', ' ', strtolower(basename(parse_url($url, \PHP_URL_PATH), '.png')));
-            if (!array_key_exists($emojiCodePoints, $emojisCodePoints)) {
+            if (!\array_key_exists($emojiCodePoints, $emojisCodePoints)) {
                 $ignored[] = [
                     'emojiCodePoints' => $emojiCodePoints,
                     'shortCode' => $shortCode,
@@ -167,9 +167,9 @@ final class Builder
             $emojiCodePoints = str_replace('-', ' ', strtolower($data['unified']));
             $shortCode = $data['short_name'];
             $shortCodes = $data['short_names'];
-            $shortCodes = array_map(fn ($v) => ":$v:", $shortCodes);
+            $shortCodes = array_map(static fn ($v) => ":$v:", $shortCodes);
 
-            if (!array_key_exists($emojiCodePoints, $emojisCodePoints)) {
+            if (!\array_key_exists($emojiCodePoints, $emojisCodePoints)) {
                 $ignored[] = [
                     'emojiCodePoints' => $emojiCodePoints,
                     'shortCode' => $shortCode,
@@ -221,7 +221,7 @@ final class Builder
                 if (!str_starts_with($filename, 'emoji-')) {
                     continue;
                 }
-                for ($i = 0; ord($k[$i]) < 128 || "\xC2" === $k[$i]; ++$i) {
+                for ($i = 0; \ord($k[$i]) < 128 || "\xC2" === $k[$i]; ++$i) {
                 }
                 for ($j = $i; isset($k[$j]) && !isset($firstChars[$k[$j]]); ++$j) {
                 }
@@ -233,7 +233,7 @@ final class Builder
         sort($firstChars);
 
         $quickCheck = '"'.str_replace('%', '\\x', rawurlencode(implode('', $firstChars))).'"';
-        $file = dirname(__DIR__, 2).'/Transliterator/EmojiTransliterator.php';
+        $file = \dirname(__DIR__, 2).'/Transliterator/EmojiTransliterator.php';
         file_put_contents($file, preg_replace('/QUICK_CHECK = .*;/m', "QUICK_CHECK = {$quickCheck};", file_get_contents($file)));
     }
 

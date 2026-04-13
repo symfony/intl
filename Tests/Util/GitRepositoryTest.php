@@ -42,7 +42,7 @@ class GitRepositoryTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        @mkdir($this->targetDir, 0777, true);
+        @mkdir($this->targetDir, 0o777, true);
 
         new GitRepository($this->targetDir);
     }
@@ -59,14 +59,14 @@ class GitRepositoryTest extends TestCase
         $this->assertNotEmpty($git->getLastAuthor());
         $this->assertInstanceOf(\DateTimeImmutable::class, $git->getLastAuthoredDate());
         $this->assertStringMatchesFormat('v%s', $git->getLastTag());
-        $this->assertStringMatchesFormat('v3%s', $git->getLastTag(fn ($tag) => str_starts_with($tag, 'v3')));
+        $this->assertStringMatchesFormat('v3%s', $git->getLastTag(static fn ($tag) => str_starts_with($tag, 'v3')));
     }
 
     public function testItCheckoutsToTheLastTag()
     {
         $git = GitRepository::download(self::REPO_URL, $this->targetDir);
         $lastCommitHash = $git->getLastCommitHash();
-        $lastV3Tag = $git->getLastTag(fn ($tag) => str_starts_with($tag, 'v3'));
+        $lastV3Tag = $git->getLastTag(static fn ($tag) => str_starts_with($tag, 'v3'));
 
         $git->checkout($lastV3Tag);
 
