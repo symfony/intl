@@ -276,7 +276,7 @@ class BundleEntryReaderTest extends TestCase
         $readerImpl = $this->createStub(BundleEntryReaderInterface::class);
         $readerImpl
             ->method('read')
-            ->willReturnCallback(function (...$args) use (&$series) {
+            ->willReturnCallback(static function (...$args) use (&$series) {
                 [$expectedArgs, $return] = array_shift($series);
 
                 return $expectedArgs === $args ? $return : null;
@@ -298,7 +298,7 @@ class BundleEntryReaderTest extends TestCase
             $readerImpl = $this->createStub(BundleEntryReaderInterface::class);
             $readerImpl
                 ->method('read')
-                ->willReturnCallback(function (...$args) use (&$series) {
+                ->willReturnCallback(static function (...$args) use (&$series) {
                     [$expectedArgs, $return] = array_shift($series);
 
                     return $expectedArgs === $args ? $return : null;
@@ -322,7 +322,7 @@ class BundleEntryReaderTest extends TestCase
         $readerImpl = $this->createStub(BundleEntryReaderInterface::class);
         $readerImpl
             ->method('read')
-            ->willReturnCallback(function (...$args) {
+            ->willReturnCallback(static function (...$args) {
                 static $series = [
                     [[self::RES_DIR, 'en_GB'], ['Foo' => 'Baz']],
                     [[self::RES_DIR, 'en'], ['Foo' => 'Bar']],
@@ -352,7 +352,7 @@ class BundleEntryReaderTest extends TestCase
             $readerImpl = $this->createStub(BundleEntryReaderInterface::class);
             $readerImpl
                 ->method('read')
-                ->willReturnCallback(function (...$args) use (&$series) {
+                ->willReturnCallback(static function (...$args) use (&$series) {
                     [$expectedArgs, $return] = array_shift($series);
 
                     return $expectedArgs === $args ? $return : null;
@@ -382,7 +382,7 @@ class BundleEntryReaderTest extends TestCase
             $readerImpl = $this->createStub(BundleEntryReaderInterface::class);
             $readerImpl
                 ->method('read')
-                ->willReturnCallback(function (...$args) use (&$series) {
+                ->willReturnCallback(static function (...$args) use (&$series) {
                     [$expectedArgs, $return] = array_shift($series);
 
                     return $expectedArgs === $args ? $return : null;

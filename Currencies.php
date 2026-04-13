@@ -72,7 +72,7 @@ final class Currencies extends ResourceBundle
             $names = iterator_to_array($names);
         }
 
-        array_walk($names, function (&$value) {
+        array_walk($names, static function (&$value) {
             $value = $value[self::INDEX_NAME];
         });
 
