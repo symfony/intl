@@ -258,3 +258,5 @@ final class Builder
         return $maps;
     }
 }
+
+// @php-cs-fixer-ignore psr_autoloading
