@@ -28,6 +28,11 @@ abstract class AbstractIntlDateFormatterTestCase extends TestCase
 {
     private $defaultLocale;
 
+    /**
+     * @see https://unicode-org.atlassian.net/browse/CLDR-14032
+     */
+    private const ICU_WHITESPACES = ["\u{00A0}", "\u{202F}", "\u{2009}"];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -54,7 +59,7 @@ abstract class AbstractIntlDateFormatterTestCase extends TestCase
 
         $this->assertEquals(
             $this->getDateTime(0, $formatter->getTimeZoneId())->format('M j, Y, g:i A'),
-            $formatter->format(0)
+            str_replace(self::ICU_WHITESPACES, ' ', $formatter->format(0))
         );
     }
 
@@ -65,7 +70,7 @@ abstract class AbstractIntlDateFormatterTestCase extends TestCase
     {
         $formatter = $this->getDateFormatter('en', null, IntlDateFormatter::SHORT, 'UTC', IntlDateFormatter::GREGORIAN);
 
-        $this->assertSame('EEEE, MMMM d, y \'at\' h:mm a', $formatter->getPattern());
+        $this->assertSame('EEEE, MMMM d, y \'at\' h:mm a', str_replace(self::ICU_WHITESPACES, ' ', $formatter->getPattern()));
     }
 
     /**
@@ -75,7 +80,7 @@ abstract class AbstractIntlDateFormatterTestCase extends TestCase
     {
         $formatter = $this->getDateFormatter('en', IntlDateFormatter::SHORT, null, 'UTC', IntlDateFormatter::GREGORIAN);
 
-        $this->assertSame('M/d/yy, h:mm:ss a zzzz', $formatter->getPattern());
+        $this->assertSame('M/d/yy, h:mm:ss a zzzz', str_replace(self::ICU_WHITESPACES, ' ', $formatter->getPattern()));
     }
 
     /**
@@ -525,7 +530,7 @@ abstract class AbstractIntlDateFormatterTestCase extends TestCase
     public function testDateAndTimeType($timestamp, $datetype, $timetype, $expected)
     {
         $formatter = $this->getDateFormatter('en', $datetype, $timetype, 'UTC');
-        $this->assertSame($expected, $formatter->format($timestamp));
+        $this->assertSame($expected, str_replace(self::ICU_WHITESPACES, ' ', $formatter->format($timestamp)));
     }
 
     public static function dateAndTimeTypeProvider()
