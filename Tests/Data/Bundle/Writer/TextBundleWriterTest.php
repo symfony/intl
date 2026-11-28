@@ -29,7 +29,7 @@ class TextBundleWriterTest extends TestCase
     protected function setUp(): void
     {
         $this->writer = new TextBundleWriter();
-        $this->directory = sys_get_temp_dir().'/TextBundleWriterTest/'.random_int(1000, 9999);
+        $this->directory = sys_get_temp_dir().'/sf_intl_'.hash('xxh32', __FILE__).'/'.random_int(1000, 9999);
         $this->filesystem = new Filesystem();
 
         $this->filesystem->mkdir($this->directory);
@@ -37,7 +37,7 @@ class TextBundleWriterTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->filesystem->remove($this->directory);
+        $this->filesystem->remove(\dirname($this->directory));
     }
 
     public function testWrite()
