@@ -26,7 +26,7 @@ class LocaleScannerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->directory = sys_get_temp_dir().'/LocaleScannerTest/'.random_int(1000, 9999);
+        $this->directory = sys_get_temp_dir().'/sf_intl_'.hash('xxh32', __FILE__).'/'.random_int(1000, 9999);
         $this->filesystem = new Filesystem();
         $this->scanner = new LocaleScanner();
 
@@ -58,7 +58,7 @@ class LocaleScannerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->filesystem->remove($this->directory);
+        $this->filesystem->remove(\dirname($this->directory));
     }
 
     public function testScanLocales()

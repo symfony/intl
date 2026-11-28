@@ -30,7 +30,7 @@ class GitRepositoryTest extends TestCase
     #[After]
     protected function cleanup()
     {
-        $this->targetDir = sys_get_temp_dir().'/GitRepositoryTest/source';
+        $this->targetDir = sys_get_temp_dir().'/sf_intl_'.hash('xxh32', __FILE__);
 
         $fs = new Filesystem();
         $fs->remove($this->targetDir);
